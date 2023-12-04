@@ -21,7 +21,7 @@
         margin: 0%;
         padding: 0%;
         overflow-x: hidden;
-        overflow-y: auto;
+        /* overflow-y: auto; */
         box-sizing: border-box;
       }
 
@@ -89,7 +89,8 @@
       }
       .con-2 {
         width: fit-content;
-        height: 100vh;
+        min-height: 100vh;
+        overflow-y: auto;
       }
       .col {
         padding: 2.5em;
@@ -146,7 +147,7 @@
       <div class="d-grid mx-auto my-3">
         <a
           href="#game"
-          class="d-flex btn btn-outline-primary fs-5 my-auto px-5"
+          class="d-flex btn btn-outline-primary fs-5 my-auto px-5 border border-2"
           id="start"
         >
           Start
@@ -156,7 +157,7 @@
 
     <div class="container-fluid con-2" id="game" style="display: none">
       <b class="fs-1 mx-auto my-auto"> Let's Play TIC-TAC-TOE </b>
-      <div class="container game-box mx-auto my-5">
+      <div class="container game-box mx-auto my-2">
         <div class="row m-2">
           <button
             class="col m-2 fw-bold text-light btn"
@@ -228,9 +229,16 @@
           </button>
         </div>
       </div>
-      <div class="btn">Reload</div>
+      <div
+        class="btn p-2 my-2 outline btn-outline-primary fs-5"
+        id="load"
+        onclick="window.location.reload()"
+        style="overflow: hidden; visibility: hidden"
+      >
+        Reload
+      </div>
     </div>
-    <div style="display: none; visibility: hidden" id="name blog"></div>
+    <div id="name blog"></div>
     <script>
       let s = document.getElementById("start");
       let g = document.getElementById("game");
@@ -329,11 +337,15 @@
           // console.log(" player 1  : ", player1, " player 2  : ", player2);
           if (checkWinner(player1, player2) === 1) {
             alert(`Player 1 wins : ${n1.value}`);
+
+            document.getElementById("load").style.visibility = "visible";
           } else if (checkWinner(player1, player2) === 2) {
-            alert(`Player 1 wins : ${n1.value}`);
+            alert(`Player 2 wins : ${n2.value}`);
+
+            document.getElementById("load").style.visibility = "visible";
           } else if (f === 9) {
             alert("Game Draw");
-            console.log("Game Draw");
+            document.getElementById("load").style.visibility = "visible";
           }
         }
       }
