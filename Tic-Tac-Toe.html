@@ -148,6 +148,7 @@
         <a
           href="#game"
           class="d-flex btn btn-outline-primary fs-5 my-auto px-5 border border-2"
+          href="#collapseExample"
           id="start"
         >
           Start
@@ -230,10 +231,11 @@
         </div>
       </div>
       <div
-        class="btn p-2 my-2 outline btn-outline-primary fs-5"
+        class="btn p-2 my-2 outline btn-outline-primary fs-5 btn-close btn-close-white"
         id="load"
         onclick="window.location.reload()"
         style="overflow: hidden; visibility: hidden"
+        aria-label="close"
       >
         Reload
       </div>
@@ -242,9 +244,21 @@
     <script>
       let s = document.getElementById("start");
       let g = document.getElementById("game");
+
+      let list = document.querySelectorAll(".col");
+      let f = 0;
+
+      let player1 = 0;
+      let player2 = 0;
+
+      let n1 = document.getElementById("input-1");
+      let n2 = document.getElementById("input-2");
+
       s.onclick = function () {
         if (g.style.display == "none") {
-          g.style.display = "grid";
+          if (n1.value === null || n2.value === "") {
+            alert("Enter player name");
+          } else g.style.display = "grid";
         } else {
           g.style.display == "none";
         }
@@ -304,15 +318,6 @@
         }
       }
 
-      let list = document.querySelectorAll(".col");
-      let f = 0;
-
-      let player1 = 0;
-      let player2 = 0;
-
-      let n1 = document.getElementById("input-1");
-      let n2 = document.getElementById("input-2");
-
       function dis(y) {
         if (list[y - 1].innerHTML === "X" || list[y - 1].innerHTML === "O") {
           list[y - 1].isContentEditable = false;
@@ -337,11 +342,10 @@
           // console.log(" player 1  : ", player1, " player 2  : ", player2);
           if (checkWinner(player1, player2) === 1) {
             alert(`Player 1 wins : ${n1.value}`);
-
             document.getElementById("load").style.visibility = "visible";
           } else if (checkWinner(player1, player2) === 2) {
             alert(`Player 2 wins : ${n2.value}`);
-
+            document.getElementById("load").style.visibility = "visible";
             document.getElementById("load").style.visibility = "visible";
           } else if (f === 9) {
             alert("Game Draw");
